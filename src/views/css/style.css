@@ -1,0 +1,19 @@
+#circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: #67b8ff;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+}

@@ -1,45 +1,32 @@
 const socket = io();
 
-socket.on("welcome", data => {
-    const text = document.querySelector("#text");
-    text.textContent = data;
-})
+const circle = document.querySelector("#circle");
 
-const emitToServer = document.querySelector("#emit-to-server");
-emitToServer.addEventListener("click", () => {
-    socket.emit("server", "Hola, servidor 👀");
-});
-
-socket.on("everyone", message => {
-    console.log(message);
-});
-
-const emitToLast = document.querySelector("#emit-to-last");
-emitToLast.addEventListener("click", () => {
-
-    socket.emit("last", "Hola 😄");
-
-});
-
-socket.on("salute", message => {
-    console.log(message);
-});
-
-// on, once, off
-socket.on("on", () => {
-    console.log("Se emite varias veces");
-});
-
-socket.once("once", () => {
-    console.log("Se emite una sola vez");
-});
-
-const listener = () => {
-    console.log("Se apaga el evento");
+const drawCircle = position => {
+    circle.style.top = position.top;
+    circle.style.left = position.left;
 }
 
-socket.on("off", listener);
+const drag = e => {
 
-setTimeout(() => {
-    socket.off("off", listener);
-}, 2000);
+    const position =  {
+        top: e.clientY + "px",
+        left: e.clientX + "px"
+    };
+
+    drawCircle(position);
+    socket.emit("circle position", position);
+
+}
+
+document.addEventListener("mousedown", e => {
+    document.addEventListener("mousemove", drag)
+});
+
+document.addEventListener("mouseup", e => {
+    document.removeEventListener("mousemove", drag);
+});
+
+socket.on("move circle", position => {
+    drawCircle(position);
+});
