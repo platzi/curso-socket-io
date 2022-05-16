@@ -15,7 +15,18 @@ app.get("/", (req, res) => {
 
 io.on("connection", socket => {
 
-    console.log(socket.id);
+    /* console.log("Clientes conectados: ", io.engine.clientsCount);
+    console.log("ID del socket conectado: ", socket.id); */
+
+    /* socket.on("disconnect", () => {
+
+        console.log("El socket " + socket.id + " se ha desconectado.");
+
+    }); */
+
+    socket.conn.once("upgrade", () => {
+        console.log("Hemos pasado de HTTP Long-Polling a ", socket.conn.transport.name);
+    });
 
 });
 
