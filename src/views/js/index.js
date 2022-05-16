@@ -1,31 +1,19 @@
 const socket = io();
 
-function checkSocketStatus() {
-    console.log("Estado del socket: ", socket.connected);
-}
-
-socket.on("connect", () => {
-
-    console.log("El socket se ha conectado: ", socket.id);
-    checkSocketStatus();
-
-});
-
-socket.on("connect_error", () => {
-    console.log("No pude conectarme 😔");
+socket.on("welcome", data => {
+    const text = document.querySelector("#text");
+    text.textContent = data;
 })
 
-socket.on("disconnect", () => {
+const emitToServer = document.querySelector("#emit-to-server");
+emitToServer.addEventListener("click", () => {
 
-    console.log("El socket se ha desconectado: ", socket.id);
-    checkSocketStatus();
+    socket.emit("server", "Hola, servidor 👀");
 
 });
 
-socket.io.on("reconnect_attempt", () => {
-    console.log("Estoy intentado reconectarme 🤪");
-});
+socket.on("everyone", message => {
 
-socket.io.on("reconnect", () => {
-    console.log("¡Me he vuelto a conectar! 😎");
+    console.log(message);
+
 });
