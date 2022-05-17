@@ -15,9 +15,9 @@ app.get("/", (req, res) => {
 
 io.on("connection", socket => {
 
-    socket.on("is connected", msg => {
-        console.log(msg);
-    })
+    socket.on("circle position", position => {
+        socket.broadcast.emit("move circle", position);
+    });
 
 });
 
