@@ -1,6 +1,3 @@
-//process.env.DEBUG = "*";
-process.env.DEBUG = "engine, socket.io:socket, socket.io:client";
-
 const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
@@ -16,11 +13,9 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/index.html");
 });
 
-io.of("custom-namespace").on("connection", socket => {
+io.on("connection", socket => {
 
-    socket.on("circle position", position => {
-        socket.broadcast.emit("move circle", position);
-    });
+
 
 });
 
