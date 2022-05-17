@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io("/custom-namespace");
 
 const circle = document.querySelector("#circle");
 
@@ -15,7 +15,6 @@ const drag = e => {
     };
 
     drawCircle(position);
-    console.log("Se envia el evento al servidors");
     socket.volatile.emit("circle position", position);
 
 }
